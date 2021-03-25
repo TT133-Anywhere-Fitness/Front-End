@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 
 export default function SignUp(){
     const [ credential, setCredential] = useState({ username: '', password: '', role: ''});
 
     const handleChange = event => {
-        const {name, type, value,} = event.target;
         setCredential({...credential, [event.target.name]: event.target.value});
+    }
+
+    const onSubmit = evt => {
+        evt.preventDefault();
+        axios.post('/', {credential})
     }
 
     return(
         <div className="initForm">
-            <form>
+            <form onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="Name">Name </label>
                     <input value={credential.username} name="username" type="text" onChange={handleChange}/>
@@ -42,4 +47,3 @@ export default function SignUp(){
     )
 }
 
-console.log();
