@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 
+
 export default function SignUp(){
     const [ credential, setCredential] = useState({ username: '', password: '', role: ''});
 
@@ -15,14 +16,22 @@ export default function SignUp(){
 
     return(
         <div className="initForm">
+
+            <div className="headerDiv"></div>
+
+
             <form onSubmit={onSubmit}>
+            <div>
+               <h1>Sign Up Form</h1>
+            </div>
+
                 <div>
                     <label htmlFor="Name">Name </label>
                     <input value={credential.username} name="username" type="text" onChange={handleChange}/>
                 </div>
 
                 <div>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password </label>
                     <input value={credential.password} name="password" type="password"
                     onChange={handleChange}/>
                 </div>
@@ -38,7 +47,7 @@ export default function SignUp(){
                 </div>   
 
                 <div>
-                <button>Submit</button>
+                <button type="submit">Submit</button>
                 </div> 
 
             </form>
