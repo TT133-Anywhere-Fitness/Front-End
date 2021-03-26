@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import * as Yup from "yup";
 
 export default function SignUp(){
     const [ credential, setCredential] = useState({ username: '', password: '', role: ''});
