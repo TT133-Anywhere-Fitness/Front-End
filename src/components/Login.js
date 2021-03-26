@@ -4,8 +4,9 @@ import React, { useState } from "react";
 
 export default function Login(){
     const [credential, setCredential] = useState(
-        { username: '', password:'', instructorCode:'' }
+        { username: '', password:''}
     )
+    const[authCode, setAuthCode]= useState('')
 
     const handleChange = event => {
         setCredential({...credential, [event.target.name]: event.target.value});
@@ -13,7 +14,7 @@ export default function Login(){
 
     const onSubmit = event => {
         event.preventDefault();
-        axios.post('/', {credential})
+        console.log(credential)
     }
 
     return (

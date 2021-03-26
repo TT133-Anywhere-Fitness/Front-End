@@ -21,14 +21,7 @@ function App() {
         <Route path='/signup' component={SignUp}/>
         <Route path='/login' component={Login}/>
       </Switch>
-      
 
-
-
-      {/* <Route exact path='/' component={Home}/>
-    <Route path='/food' component={Food}/> 
-    <Route path='/drinks' component={Drinks}/> */}
-    </div>
     </BrowserRouter>
   );
 }

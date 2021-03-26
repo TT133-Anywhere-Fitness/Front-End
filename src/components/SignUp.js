@@ -11,7 +11,7 @@ export default function SignUp(){
 
     const onSubmit = evt => {
         evt.preventDefault();
-        axios.post('/', {credential})
+        console.log(credential)
     }
 
     return(
