@@ -1,19 +1,26 @@
+//    "email": "eve.holt@reqres.in",
+//    "password": "cityslicka"
+
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom"
 
 
 export default function Login(){
-    const [credentials, setCredential] = useState(
+    const [credentials, setCredentials] = useState(
         { username: '', password:''}
     )
     const[authCode, setAuthCode]= useState('')
+    const history = useHistory();
 
     const handleChange = e => {
         if(e.target.name === "authCode"){
-            setAuthCode(e.target.value)
+            setAuthCode(e.target.value);
         }else{
-            setCredential({...credentials, [e.target.name]: e.target.value});
+            setCredentials({
+                ...credentials, 
+                [e.target.name]: e.target.value
+            });
         }
     }
 
@@ -23,6 +30,11 @@ export default function Login(){
             .then(res => {
                 console.log(res)
                 localStorage.setItem("authToken", res.data.token); //replace with actual backend token response when ready
+                if(authCode.length > 0){
+                    history.push("/addclass") //routes to instructor page
+                }else{
+                    history.push("/searchclass") //routes to student page
+                }
             })
             .catch(err => {
                 console.log(err)
