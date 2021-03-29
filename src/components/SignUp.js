@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
-import * as Yup from "yup";
+import React, { useState, useEffect } from 'react'
+import * as yup from "yup";
+import { schema } from './FormSchema';
 
 export default function SignUp(){
-    const [ credential, setCredential] = useState({ username: '', password: '', role: ''});
+    const [ credential, setCredential] = useState({ username: '', password: ''});
+    const [errors, setErrors] = useState({
+        username:'', password:''})
+    const [disabled, setDisabled] = useState(true)
+    const setCredentialErrors = (name, value) => {
+        yup.reach(schema, name).validate(value)
+        .then(() => setErrors({...errors, [name]: ''}))
+        .catch(err => setErrors({...errors, [name]: err.errors[0]}))
+    }
 
     const handleChange = event => {
+        const {name, value, type } = event.target;
+        const valueToUse = event.target.value;
         setCredential({...credential, [event.target.name]: event.target.value});
+        setCredentialErrors(name, valueToUse)
+        setCredential({...credential, [name]: valueToUse})
     }
 
     const onSubmit = evt => {
@@ -13,11 +26,20 @@ export default function SignUp(){
         console.log(credential)
     }
 
+    useEffect(() => {
+        schema.isValid(credential).then(valid => setDisabled(!valid))
+    }, [credential])
+
+
     return(
         <div className="initForm">
 
             <div className="headerDiv"></div>
 
+            <div style={{ color : 'red' }}>
+                <div>{errors.username}</div>
+                <div>{errors.password}</div>
+            </div>
 
             <form onSubmit={onSubmit}>
             <div>
@@ -46,7 +68,7 @@ export default function SignUp(){
                 </div>   
 
                 <div>
-                <button type="submit">Submit</button>
+                <button disabled={disabled} type="submit">Submit</button>
                 </div> 
 
             </form>

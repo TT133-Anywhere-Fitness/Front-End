@@ -17,7 +17,7 @@ export default function Login(){
 
 
     const handleChange = event => {
-        const { name, value, type} = event.target;
+        const { name, value, type } = event.target;
         const valueToUse = event.target.value;
         setCredential({...credential, [event.target.name]: event.target.value});
         setCredentialErrors(name, valueToUse)
