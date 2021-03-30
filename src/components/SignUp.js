@@ -54,6 +54,7 @@ export default function SignUp(){
             <div style={{ color : 'red' }}>
                 <div>{errors.username}</div>
                 <div>{errors.password}</div>
+                <div>{errors.role}</div>
             </div>
             <form onSubmit={onSubmit}>
                 <label htmlFor="username">Username </label>
