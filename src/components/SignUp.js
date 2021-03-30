@@ -1,11 +1,3 @@
-
-    const handleChange = event => {
-        const { name } = event.target;
-        const valueToUse = event.target.value;
-        setCredential({...credential, [event.target.name]: event.target.value});
-        setCredentialErrors(name, valueToUse)
-        setCredential({...credential, [name]: valueToUse})
-=======
 //     "email": "eve.holt@reqres.in",
 //     "password": "pistol"
 
@@ -45,6 +37,7 @@ export default function SignUp(){
             }else if(credentials.role === 'student'){
                 history.push("/searchclass") //routes to student page
             }
+            console.log(credentials);
         })
         .catch(err => {
             console.log(err)
@@ -52,8 +45,8 @@ export default function SignUp(){
     }
 
     useEffect(() => {
-        schema.isValid(credential).then(valid => setDisabled(!valid))
-    }, [credential])
+        schema.isValid(credentials).then(valid => setDisabled(!valid))
+    }, [credentials])
 
 
     return(

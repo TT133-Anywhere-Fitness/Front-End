@@ -52,8 +52,8 @@ export default function Login(){
     }
 
     useEffect(() => {
-        schema.isValid(credential).then(valid => setDisabled(!valid))
-    }, [credential])
+        schema.isValid(credentials).then(valid => setDisabled(!valid))
+    }, [credentials])
 
     return (
         <div className="loginForm">
