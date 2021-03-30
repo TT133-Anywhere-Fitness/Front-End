@@ -2,14 +2,23 @@
 //    "password": "cityslicka"
 
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom"
+import { schema } from "./FormSchema";
+import * as yup from "yup";
 
 
 export default function Login(){
     const [credentials, setCredentials] = useState(
         { username: '', password:''}
-    )
+    );
+    const [errors, setErrors] = useState({ username: '', password:''})
+    const [disabled, setDisabled] = useState(true)
+    const setCredentialErrors = (name, value) => {
+        yup.reach(schema, name).validate(value)
+        .then(() => setErrors({...errors, [name]: ''}))
+        .catch(err => setErrors({...errors, [name]: err.errors[0]}))
+    }
     const[authCode, setAuthCode]= useState('')
     const history = useHistory();
 
@@ -21,6 +30,7 @@ export default function Login(){
                 ...credentials, 
                 [e.target.name]: e.target.value
             });
+            setCredentialErrors(e.target.name, e.target.value)
         }
     }
 
@@ -41,8 +51,16 @@ export default function Login(){
             })
     }
 
+    useEffect(() => {
+        schema.isValid(credential).then(valid => setDisabled(!valid))
+    }, [credential])
+
     return (
         <div className="loginForm">
+            <div style={{ color : 'red' }}>
+                <div>{errors.username}</div>
+                <div>{errors.password}</div>
+            </div>
             <form onSubmit={login}>
                 <label htmlFor="username">Username </label>
                 <input 
@@ -68,7 +86,7 @@ export default function Login(){
                     onChange={handleChange}
                 />
                 <br />
-                <button>Log In</button>
+                <button disabled={disabled}>Log In</button>
             </form>
         </div>
     
