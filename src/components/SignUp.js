@@ -7,6 +7,7 @@ import * as yup from "yup";
 import axios from 'axios';
 import { schema } from './FormSchema';
 import { useHistory } from "react-router-dom"
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 
 export default function SignUp(){
@@ -29,7 +30,7 @@ export default function SignUp(){
 
     const onSubmit = e => {
         e.preventDefault();
-        axios.post("https://reqres.in/api/register", credentials) //replace with actual backend user endpoint when ready
+        axiosWithAuth().post("/users/sign-up", credentials) //replace with actual backend user endpoint when ready
         .then(res => {
             console.log(res);
             localStorage.setItem("authToken", res.data.token); //replace with actual backend token response when ready
@@ -38,7 +39,6 @@ export default function SignUp(){
             }else if(credentials.role === 'student'){
                 history.push("/searchclass") //routes to student page
             }
-            console.log(credentials)
         })
         .catch(err => {
             console.log(err)

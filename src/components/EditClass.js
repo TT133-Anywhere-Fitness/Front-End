@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom"
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 
-export default function AddClass(){
+export default function EditClass(props){
     const [classItem, setClassItem] = useState({
+        id:'',
         name: '', 
         type:'',
         date: '',
@@ -15,6 +16,16 @@ export default function AddClass(){
         numberOfRegisteredAttendees: '',
         maxClassSize: ''
     });
+    const { id } = useParams();
+    const { push } = useHistory();
+
+    useEffect(() => {
+        axios.get(`/classes/${id}`)
+          .then(res => {
+            setClassItem(res.data);
+          })
+          .catch(err => console.log(err));
+    }, [])
 
     const handleChange = e => {
         setClassItem({
@@ -23,10 +34,18 @@ export default function AddClass(){
         });
     }
 
-    const addClass = e => {
+    const editClass = e => {
         e.preventDefault();
-        axiosWithAuth().post("/classes", classItem) //replace with actual backend user endpoint when ready
+        axiosWithAuth().put(`/classes/${id}`, classItem) //replace with actual backend user endpoint when ready
         .then(res => {
+            props.setClasses(props.classes.map(classes => {
+                if(classes.id === res.data.id){
+                    return res.data
+                }else{
+                    return classes;
+                }
+            }));
+            push('/addclass');
         })
         .catch(err => {
             console.log(err)
@@ -34,8 +53,9 @@ export default function AddClass(){
     }
 
     return (
-        <div className="loginForm">
-            <form onSubmit={addClass}>
+
+        <div className="editForm">
+            <form onSubmit={editClass}>
                 <label htmlFor="name">Class Name </label>
                 <input 
                     value={classItem.name}
@@ -100,11 +120,9 @@ export default function AddClass(){
                     onChange={handleChange}
                 />
                 <br />
-                <button>Add Class</button>
+                <button>Edit Class</button>
             </form>
         </div>
-    
-    
     )
 }
 

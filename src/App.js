@@ -4,16 +4,19 @@ import './App.css';
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import AddClass from './components/AddClass'
+import PrivateRoute from './components/PrivateRoute'
+import InstructorDashboard from "./components/InstructorDashboard";
+import EditClass from "./components/EditClass"
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path='/signup' component={SignUp}/>
-          <Route component={Login}/>
-          <Route path='/addclass' component={AddClass}/>
-          <Route path='/searchclass'/>
+          <Route exact path='/signup' component={SignUp}/>
+          <Route exact path='/' component={Login}/>
+          <PrivateRoute exact path='/addclass' component={InstructorDashboard}/>
+          <Route exact path='/searchclass'/>
         </Switch>
       </Router>
     </div>
