@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom"
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { addClass } from '../actions/index'
 
 
-export default function AddClass(){
+function AddClass(props){
     const [classItem, setClassItem] = useState({
         name: '', 
         type:'',
@@ -23,19 +25,10 @@ export default function AddClass(){
         });
     }
 
-    const addClass = e => {
-        e.preventDefault();
-        axiosWithAuth().post("/classes", classItem) //replace with actual backend user endpoint when ready
-        .then(res => {
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
 
     return (
         <div className="loginForm">
-            <form onSubmit={addClass}>
+            <form onSubmit={addClass(classItem)}>
                 <label htmlFor="name">Class Name </label>
                 <input 
                     value={classItem.name}
@@ -108,3 +101,5 @@ export default function AddClass(){
     )
 }
 
+const mapDispatchToProps = { addClass };
+export default connect(null, mapDispatchToProps)(AddClass);

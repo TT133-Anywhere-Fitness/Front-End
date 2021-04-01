@@ -5,32 +5,22 @@ import ClassList from './ClassList';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import EditClass from './EditClass';
+import { connect } from 'react-redux';
+import { fetchClasses } from '../actions/index'
 
-export default function InstructorDashboard(){
-    const [classes, setClasses] = useState([]);
-
+const InstructorDashboard = (props) => {
+    const getClasses = props.fetchClasses;
     useEffect(() => {
-        axiosWithAuth().get("/classes")
-        .then(res => {
-            setClasses(res.data);
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    },[classes])
+        getClasses();
+    },[getClasses])
 
     return(
         <div>
             <AddClass />
-            <ClassList classes={classes} setClasses={setClasses}/>
-            <Switch>
-                <Route path='editclass/:id' render={
-                props => {
-                    return <EditClass {...props} classes={classes} setClasses={setClasses}/>
-                }
-                }
-                />
-            </Switch>
+            <ClassList />
         </div>
     )
 }
+
+const mapDispatchToProps = { fetchClasses };
+export default connect(null, mapDispatchToProps)(InstructorDashboard);

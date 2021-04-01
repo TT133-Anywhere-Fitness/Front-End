@@ -1,17 +1,7 @@
 import { FETCHING_CLASSES_START, FETCHING_CLASSES_SUCCESS, FETCHING_CLASSES_FAILURE, TOGGLE_EDITING, ADD_CLASS, DELETE_CLASS, UPDATE_CLASS } from "../actions/index"
 
 const initialState = {
-    classes: [{
-        id:'',
-        name: '', 
-        type:'',
-        date: '',
-        duration: '',
-        intensity: '',
-        location: '',
-        numberOfRegisteredAttendees: '',
-        maxClassSize: ''
-    }],
+    classes: [],
     loadingClasses: false,
     errorClasses: ""
 }

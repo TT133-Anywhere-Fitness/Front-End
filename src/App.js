@@ -11,14 +11,13 @@ import EditClass from "./components/EditClass"
 function App() {
   return (
     <div className="App">
-      <Router>
+        <Route exact path='/signup' component={SignUp}/>
+        <Route exact path='/' component={Login}/>
+        
         <Switch>
-          <Route exact path='/signup' component={SignUp}/>
-          <Route exact path='/' component={Login}/>
           <PrivateRoute exact path='/addclass' component={InstructorDashboard}/>
           <Route exact path='/searchclass'/>
         </Switch>
-      </Router>
     </div>
   );
 }

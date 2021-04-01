@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 
 export const FETCHING_CLASSES_START = "FETCHING_CLASSES_START";
@@ -8,3 +9,31 @@ export const TOGGLE_EDITING = "TOGGLE_EDITING";
 export const ADD_CLASS = "ADD_CLASS";
 export const DELETE_CLASS = "DELETE_CLASS";
 export const UPDATE_CLASS = "UPDATE_CLASS";
+
+export const addClass = (classItem) => () =>{
+    axiosWithAuth().post('/classes', classItem)
+        .then(res => {
+            console.log("added")
+        })
+        .catch(err => {
+            console.log(err)
+        });
+}
+
+export const deleteClass = (classItem) => () =>{
+    axiosWithAuth().delete(`/classes/${classItem.id}`)
+    .then(res => {
+    })
+}
+export const fetchClasses = () => (dispatch) => {
+    dispatch({type: FETCHING_CLASSES_START});
+
+    axiosWithAuth().get('/classes')
+        .then(res => {
+            dispatch({type: FETCHING_CLASSES_SUCCESS, payload: res.data});
+            console.log(res.data)
+        })
+        .catch(err => {
+            dispatch({type: FETCHING_CLASSES_FAILURE, payload: err})
+        });
+}

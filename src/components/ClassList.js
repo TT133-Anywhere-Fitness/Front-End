@@ -2,17 +2,27 @@ import React from 'react';
 import { Route } from 'react-router-dom'
 import ClassCard from './ClassCard';
 import EditClass from './EditClass'
+import { connect } from 'react-redux'
 
-function ClassList({ classes, setClasses }) {
+function ClassList(props) {
+    if (props.loadingClasses){
+        return <h1>Loading...</h1>
+    }
     return(
         <div>
-                    {classes.map(item => (
-                <div key={item.id}>
-                    <ClassCard class={item} setClasses={setClasses} classes={classes}/>
-                </div>
-        ))}
+            {props.classes.map((item) => {
+                return(
+                    <ClassCard class={item} />
+                )
+            })}
         </div>
     );
 }
 
-export default ClassList;
+const mapStateToProps = (state) => {
+    return{
+        classes: state.classes,
+        loadingClasses: state.loadingClasses
+    }
+}
+export default connect(mapStateToProps, null)(ClassList);
