@@ -28,7 +28,7 @@ function AddClass(props){
 
     return (
         <div className="loginForm">
-            <form onSubmit={addClass(classItem)}>
+            <form>
                 <label htmlFor="name">Class Name </label>
                 <input 
                     value={classItem.name}
@@ -93,7 +93,7 @@ function AddClass(props){
                     onChange={handleChange}
                 />
                 <br />
-                <button>Add Class</button>
+                <button onClick={() => props.addClass(classItem)}>Add Class</button>
             </form>
         </div>
     

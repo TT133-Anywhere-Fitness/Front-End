@@ -10,21 +10,29 @@ export const ADD_CLASS = "ADD_CLASS";
 export const DELETE_CLASS = "DELETE_CLASS";
 export const UPDATE_CLASS = "UPDATE_CLASS";
 
-export const addClass = (classItem) => () =>{
+export const addClass = (classItem) => (dispatch) =>{
+    
     axiosWithAuth().post('/classes', classItem)
         .then(res => {
-            console.log("added")
+            dispatch({type: ADD_CLASS, payload: res.data})
+            console.log(res.data)
         })
         .catch(err => {
             console.log(err)
         });
 }
 
-export const deleteClass = (classItem) => () =>{
+export const deleteClass = (classItem) => (dispatch) =>{
     axiosWithAuth().delete(`/classes/${classItem.id}`)
     .then(res => {
+        dispatch({type: DELETE_CLASS, payload: res.data})
+        console.log(res.data)
     })
+    .catch(err => {
+        console.log(err)
+    });
 }
+
 export const fetchClasses = () => (dispatch) => {
     dispatch({type: FETCHING_CLASSES_START});
 

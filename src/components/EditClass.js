@@ -19,14 +19,6 @@ export default function EditClass(props){
     const { id } = useParams();
     const { push } = useHistory();
 
-    useEffect(() => {
-        axios.get(`/classes/${id}`)
-          .then(res => {
-            setClassItem(res.data);
-          })
-          .catch(err => console.log(err));
-    }, [])
-
     const handleChange = e => {
         setClassItem({
             ...classItem, 

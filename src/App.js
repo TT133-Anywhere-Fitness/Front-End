@@ -6,6 +6,7 @@ import Login from './components/Login'
 import AddClass from './components/AddClass'
 import PrivateRoute from './components/PrivateRoute'
 import InstructorDashboard from "./components/InstructorDashboard";
+import StudentDashboard from "./components/StudentDashboard";
 import EditClass from "./components/EditClass"
 
 function App() {
@@ -14,9 +15,10 @@ function App() {
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/' component={Login}/>
         
+        
         <Switch>
           <PrivateRoute exact path='/addclass' component={InstructorDashboard}/>
-          <Route exact path='/searchclass'/>
+          <PrivateRoute exact path='/searchclass' component={StudentDashboard}/>
         </Switch>
     </div>
   );

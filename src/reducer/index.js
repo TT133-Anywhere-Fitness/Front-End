@@ -3,7 +3,7 @@ import { FETCHING_CLASSES_START, FETCHING_CLASSES_SUCCESS, FETCHING_CLASSES_FAIL
 const initialState = {
     classes: [],
     loadingClasses: false,
-    errorClasses: ""
+    errorClasses: "",
 }
 
 export const reducer = (state = initialState, action) => {

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom'
-import ClassCard from './ClassCard';
+import SearchClassCard from './SearchClassCard';
 import EditClass from './EditClass'
 import { connect } from 'react-redux'
 
-function ClassList(props) {
+function SearchClassList(props) {
     if (props.loadingClasses){
         return <h1>Loading...</h1>
     }
@@ -12,7 +12,7 @@ function ClassList(props) {
         <div>
             {props.classes.map((item) => {
                 return(
-                    <ClassCard class={item} key={item.id}/>
+                    <SearchClassCard class={item} key={item.id}/>
                 )
             })}
         </div>
@@ -25,4 +25,4 @@ const mapStateToProps = (state) => {
         loadingClasses: state.loadingClasses
     }
 }
-export default connect(mapStateToProps, null)(ClassList);
+export default connect(mapStateToProps, null)(SearchClassList);
