@@ -1,13 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom"
 import { axiosWithAuth } from '../utils/axiosWithAuth'
-import { addClass } from '../actions/index'
 
 
-function AddClass(props){
+export default function EditClass(props){
     const [classItem, setClassItem] = useState({
+        id:'',
         name: '', 
         type:'',
         date: '',
@@ -17,6 +16,8 @@ function AddClass(props){
         numberOfRegisteredAttendees: '',
         maxClassSize: ''
     });
+    const { id } = useParams();
+    const { push } = useHistory();
 
     const handleChange = e => {
         setClassItem({
@@ -25,10 +26,28 @@ function AddClass(props){
         });
     }
 
+    const editClass = e => {
+        e.preventDefault();
+        axiosWithAuth().put(`/classes/${id}`, classItem) //replace with actual backend user endpoint when ready
+        .then(res => {
+            props.setClasses(props.classes.map(classes => {
+                if(classes.id === res.data.id){
+                    return res.data
+                }else{
+                    return classes;
+                }
+            }));
+            push('/addclass');
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
     return (
-        <div className="loginForm">
-            <form>
+
+        <div className="editForm">
+            <form onSubmit={editClass}>
                 <label htmlFor="name">Class Name </label>
                 <input 
                     value={classItem.name}
@@ -93,13 +112,9 @@ function AddClass(props){
                     onChange={handleChange}
                 />
                 <br />
-                <button onClick={() => props.addClass(classItem)}>Add Class</button>
+                <button>Edit Class</button>
             </form>
         </div>
-    
-    
     )
 }
 
-const mapDispatchToProps = { addClass };
-export default connect(null, mapDispatchToProps)(AddClass);

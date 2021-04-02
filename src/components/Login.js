@@ -6,11 +6,12 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom"
 import { schema } from "./FormSchema";
 import * as yup from "yup";
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 
 export default function Login(){
     const [credentials, setCredentials] = useState(
-        { username: '', password:''}
+        { username: '', password:'', authCode: ''}
     );
     const [errors, setErrors] = useState({ username: '', password:''})
     const [disabled, setDisabled] = useState(true)
@@ -19,28 +20,23 @@ export default function Login(){
         .then(() => setErrors({...errors, [name]: ''}))
         .catch(err => setErrors({...errors, [name]: err.errors[0]}))
     }
-    const[authCode, setAuthCode]= useState('')
     const history = useHistory();
 
     const handleChange = e => {
-        if(e.target.name === "authCode"){
-            setAuthCode(e.target.value);
-        }else{
-            setCredentials({
+        setCredentials({
                 ...credentials, 
                 [e.target.name]: e.target.value
-            });
-            setCredentialErrors(e.target.name, e.target.value)
-        }
+        });
+        setCredentialErrors(e.target.name, e.target.value)
     }
 
     const login = e => {
         e.preventDefault();
-        axios.post("https://reqres.in/api/login", credentials) //replace with actual backend user endpoint when ready
+        axiosWithAuth().post("/users/login", credentials) //replace with actual backend user endpoint when ready
             .then(res => {
                 console.log(res)
                 localStorage.setItem("authToken", res.data.token); //replace with actual backend token response when ready
-                if(authCode.length > 0){
+                if(credentials.authCode.length > 0){
                     history.push("/addclass") //routes to instructor page
                 }else{
                     history.push("/searchclass") //routes to student page
