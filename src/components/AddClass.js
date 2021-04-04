@@ -1,8 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom"
-import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { addClass } from '../actions/index'
 
 
