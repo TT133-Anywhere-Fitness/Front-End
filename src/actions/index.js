@@ -23,7 +23,7 @@ export const addClass = (classItem) => (dispatch) =>{
 }
 
 export const deleteClass = (classItem) => (dispatch) =>{
-    axiosWithAuth().delete(`/classes/${classItem.id}`)
+    axiosWithAuth().delete(`https://anywherrfitness.herokuapp.com/classes/${classItem.id}`)
     .then(res => {
         dispatch({type: DELETE_CLASS, payload: res.data})
         console.log(res.data)

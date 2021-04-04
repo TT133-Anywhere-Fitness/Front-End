@@ -30,14 +30,14 @@ export default function SignUp(){
 
     const onSubmit = e => {
         e.preventDefault();
-        axiosWithAuth().post("/users/sign-up", credentials) //replace with actual backend user endpoint when ready
+        axiosWithAuth().post("https://anywherrfitness.herokuapp.com/register", credentials) //replace with actual backend user endpoint when ready
         .then(res => {
-            console.log(res);
-            localStorage.setItem("authToken", res.data.token); //replace with actual backend token response when ready
+            // console.log(res);
+            // localStorage.setItem("authToken", res.data.token); //replace with actual backend token response when ready
             if(credentials.role === 'instructor'){
-                history.push("/addclass") //routes to instructor page
+                history.push("/classes/") //routes to instructor page
             }else if(credentials.role === 'student'){
-                history.push("/searchclass") //routes to student page
+                history.push("/classes") //routes to student page
             }
         })
         .catch(err => {

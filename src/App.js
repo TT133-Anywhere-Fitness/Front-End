@@ -12,13 +12,13 @@ import EditClass from "./components/EditClass"
 function App() {
   return (
     <div className="App">
-        <Route exact path='/signup' component={SignUp}/>
-        <Route exact path='/' component={Login}/>
+        <Route exact path='/register' component={SignUp}/>
+        <Route exact path='/login' component={Login}/>
         
         
         <Switch>
-          <PrivateRoute exact path='/addclass' component={InstructorDashboard}/>
-          <PrivateRoute exact path='/searchclass' component={StudentDashboard}/>
+          <PrivateRoute exact path='/classes/' component={InstructorDashboard}/>
+          <PrivateRoute exact path='/classes' component={StudentDashboard}/>
         </Switch>
     </div>
   );

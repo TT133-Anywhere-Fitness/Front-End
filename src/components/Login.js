@@ -32,14 +32,14 @@ export default function Login(){
 
     const login = e => {
         e.preventDefault();
-        axiosWithAuth().post("/users/login", credentials) //replace with actual backend user endpoint when ready
+        axiosWithAuth().post("https://anywherrfitness.herokuapp.com/login", credentials) //replace with actual backend user endpoint when ready
             .then(res => {
                 console.log(res)
                 localStorage.setItem("authToken", res.data.token); //replace with actual backend token response when ready
                 if(credentials.authCode.length > 0){
-                    history.push("/addclass") //routes to instructor page
+                    history.push("/classes/") //routes to instructor page
                 }else{
-                    history.push("/searchclass") //routes to student page
+                    history.push("/classes") //routes to student page
                 }
             })
             .catch(err => {

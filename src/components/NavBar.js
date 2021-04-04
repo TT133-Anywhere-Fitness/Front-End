@@ -8,9 +8,9 @@ export default function NavBar(){
                 <h1>Anywhere Fitness</h1>
             </div>
             <div className='links'>
-                <Link to="/">Log In</Link>
-                <Link to="/signup">Sign Up</Link>
-                <Link to='/searchclass'>Search Class</Link>
+                <Link to="/login">Log In</Link>
+                <Link to="/register">Sign Up</Link>
+                <Link to='/classes'>Search Class</Link>
             </div>
         </div>
     )

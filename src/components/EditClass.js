@@ -28,7 +28,7 @@ export default function EditClass(props){
 
     const editClass = e => {
         e.preventDefault();
-        axiosWithAuth().put(`/classes/${id}`, classItem) //replace with actual backend user endpoint when ready
+        axiosWithAuth().put(`https://anywherrfitness.herokuapp.com/classes/${id}`, classItem) //replace with actual backend user endpoint when ready
         .then(res => {
             props.setClasses(props.classes.map(classes => {
                 if(classes.id === res.data.id){
@@ -37,7 +37,7 @@ export default function EditClass(props){
                     return classes;
                 }
             }));
-            push('/addclass');
+            push('/classes/');
         })
         .catch(err => {
             console.log(err)
