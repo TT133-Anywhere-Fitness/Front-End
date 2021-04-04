@@ -1,7 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
 import SearchClassCard from './SearchClassCard';
-import EditClass from './EditClass'
 import { connect } from 'react-redux'
 
 function SearchClassList(props) {

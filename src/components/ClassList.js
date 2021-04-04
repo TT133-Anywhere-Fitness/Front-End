@@ -1,7 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
 import ClassCard from './ClassCard';
-import EditClass from './EditClass'
 import { connect } from 'react-redux'
 
 function ClassList(props) {

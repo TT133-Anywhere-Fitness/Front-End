@@ -1,6 +1,4 @@
 import React from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { useHistory, useParams} from 'react-router-dom'
 import { deleteClass, fetchClasses} from '../actions/index'
 import { connect } from "react-redux";
 
