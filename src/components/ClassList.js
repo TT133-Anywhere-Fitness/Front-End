@@ -7,7 +7,7 @@ function ClassList(props) {
         return <h1>Loading...</h1>
     }
     return(
-        <div>
+        <div className="classList">
             {props.classes.map((item) => {
                 return(
                     <ClassCard class={item} key={item.id}/>

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 function SearchClassCard({name, type, date, duration, intensity, location, numberOfRegisteredAttendees, maxClassSize}){
     return(
-        <div>
+        <div className="classCard">
             <p>{name}</p>
             <p>{type}</p>
             <p>{date}</p>

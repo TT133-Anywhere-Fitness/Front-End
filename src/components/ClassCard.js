@@ -10,7 +10,7 @@ function ClassCard(props){
     } */
 
     return(
-        <div>
+        <div className="classCard">
             <p>{name}</p>
             <p>{type}</p>
             <p>{date}</p>

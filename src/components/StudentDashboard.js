@@ -33,7 +33,7 @@ const StudentDashboard = (props) => {
     }
 
     return(
-        <div>
+        <div className="student">
             <h2>Search Classes</h2>
             <SearchBar 
                 placeholder="Search"
