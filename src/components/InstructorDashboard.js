@@ -11,7 +11,7 @@ const InstructorDashboard = (props) => {
     },[getClasses])
 
     return(
-        <div>
+        <div className="instructor">
             <AddClass />
             <ClassList />
         </div>

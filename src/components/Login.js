@@ -53,8 +53,8 @@ export default function Login(){
     return (
         <div className="loginForm">
             <div style={{ color : 'red' }}>
-                <div>{errors.username}</div>
-                <div>{errors.password}</div>
+                <p>{errors.username}</p>
+                <p>{errors.password}</p>
             </div>
             <form onSubmit={login}>
                 <label htmlFor="username">Username </label>
@@ -73,7 +73,7 @@ export default function Login(){
                     onChange={handleChange}
                 />
                 <br />
-                <label htmlFor="authCode">Instructors, please enter your authorization code: </label>
+                <label htmlFor="authCode">Authorization Code: </label>
                 <input 
                     value={credentials.instructorCode} 
                     name="authCode" 
